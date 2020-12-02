@@ -1,0 +1,3614 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.vivumlab.com/software/ownphotos/">
+      
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
+    
+    
+      
+        <title>OwnPhotos - VivumLab</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6910b76c.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.196e0c26.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#2094f3">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="blue" data-md-color-accent="">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ownphotos" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://docs.vivumlab.com/" title="VivumLab" class="md-header-nav__button md-logo" aria-label="VivumLab">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            VivumLab
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              OwnPhotos
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/Vivumlab/VivumLab/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Vivumlab/VivumLab
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://docs.vivumlab.com/" title="VivumLab" class="md-nav__button md-logo" aria-label="VivumLab">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5z"/></svg>
+
+    </a>
+    VivumLab
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/Vivumlab/VivumLab/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Vivumlab/VivumLab
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../core/Installation/" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../core/Next-Step/" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../FAQ-Troubleshoot/" class="md-nav__link">
+      Troubleshooting / FAQ
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" >
+    <label class="md-nav__link" for="nav-5">
+      Setup
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Setup" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon"></span>
+        Setup
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../core/Backup/" class="md-nav__link">
+      Backups
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../core/Bastion/" class="md-nav__link">
+      Bastion Server
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../core/Storage/" class="md-nav__link">
+      Storage
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../core/Terraform/" class="md-nav__link">
+      Terraform
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../core/Tor/" class="md-nav__link">
+      Tor Onion Services
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
+    <label class="md-nav__link" for="nav-6">
+      Included Software
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Included Software" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon"></span>
+        Included Software
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-1" type="checkbox" id="nav-6-1" >
+    <label class="md-nav__link" for="nav-6-1">
+      Analytics
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Analytics" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-1">
+        <span class="md-nav__icon md-icon"></span>
+        Analytics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../matomo/" class="md-nav__link">
+      Matomo
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-2" type="checkbox" id="nav-6-2" >
+    <label class="md-nav__link" for="nav-6-2">
+      Automation
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Automation" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-2">
+        <span class="md-nav__icon md-icon"></span>
+        Automation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../homeassistant/" class="md-nav__link">
+      Home Assistant
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../homebridge/" class="md-nav__link">
+      HomeBridge
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../kibitzr/" class="md-nav__link">
+      Kibitzr
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-3" type="checkbox" id="nav-6-3" >
+    <label class="md-nav__link" for="nav-6-3">
+      Blogging Platforms
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Blogging Platforms" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-3">
+        <span class="md-nav__icon md-icon"></span>
+        Blogging Platforms
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ghost/" class="md-nav__link">
+      Ghost
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-4" type="checkbox" id="nav-6-4" >
+    <label class="md-nav__link" for="nav-6-4">
+      Calendaring and Contacts Management
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Calendaring and Contacts Management" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-4">
+        <span class="md-nav__icon md-icon"></span>
+        Calendaring and Contacts Management
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../nextcloud/" class="md-nav__link">
+      NextCloud
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-5" type="checkbox" id="nav-6-5" >
+    <label class="md-nav__link" for="nav-6-5">
+      Chat
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chat" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-5">
+        <span class="md-nav__icon md-icon"></span>
+        Chat
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../matterbridge/" class="md-nav__link">
+      Matterbridge
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../thelounge/" class="md-nav__link">
+      The Lounge
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../zulip/" class="md-nav__link">
+      Zulip
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-6" type="checkbox" id="nav-6-6" >
+    <label class="md-nav__link" for="nav-6-6">
+      Docker & VM Management
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Docker & VM Management" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-6">
+        <span class="md-nav__icon md-icon"></span>
+        Docker & VM Management
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../portainer/" class="md-nav__link">
+      Portainer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../taisun/" class="md-nav__link">
+      Taisun
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-7" type="checkbox" id="nav-6-7" >
+    <label class="md-nav__link" for="nav-6-7">
+      Document Management
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Document Management" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-7">
+        <span class="md-nav__icon md-icon"></span>
+        Document Management
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mayan/" class="md-nav__link">
+      Mayan
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../paperless/" class="md-nav__link">
+      Paperless
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../teedy/" class="md-nav__link">
+      Teedy
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-8" type="checkbox" id="nav-6-8" >
+    <label class="md-nav__link" for="nav-6-8">
+      E-books
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="E-books" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-8">
+        <span class="md-nav__icon md-icon"></span>
+        E-books
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../calibre/" class="md-nav__link">
+      Calibre
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lazylibrarian/" class="md-nav__link">
+      Lazylibrarian
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../readarr/" class="md-nav__link">
+      Readarr
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-9" type="checkbox" id="nav-6-9" >
+    <label class="md-nav__link" for="nav-6-9">
+      Email
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Email" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-9">
+        <span class="md-nav__icon md-icon"></span>
+        Email
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mailu/" class="md-nav__link">
+      Mailu
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-10" type="checkbox" id="nav-6-10" >
+    <label class="md-nav__link" for="nav-6-10">
+      Federated Identity/Authentication
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Federated Identity/Authentication" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-10">
+        <span class="md-nav__icon md-icon"></span>
+        Federated Identity/Authentication
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../authelia/" class="md-nav__link">
+      Authelia
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../keycloak/" class="md-nav__link">
+      Keycloak
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../openldap/" class="md-nav__link">
+      OpenLDAP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-11" type="checkbox" id="nav-6-11" >
+    <label class="md-nav__link" for="nav-6-11">
+      Feed Readers
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Feed Readers" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-11">
+        <span class="md-nav__icon md-icon"></span>
+        Feed Readers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../freshrss/" class="md-nav__link">
+      FreshRSS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../miniflux/" class="md-nav__link">
+      Miniflux
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-12" type="checkbox" id="nav-6-12" >
+    <label class="md-nav__link" for="nav-6-12">
+      File Sharing and Synchronization
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="File Sharing and Synchronization" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-12">
+        <span class="md-nav__icon md-icon"></span>
+        File Sharing and Synchronization
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../duplicati/" class="md-nav__link">
+      Duplicati
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../jackett/" class="md-nav__link">
+      Jackett
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lidarr/" class="md-nav__link">
+      Lidarr
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../minio/" class="md-nav__link">
+      Minio
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mylar/" class="md-nav__link">
+      Mylar
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ombi/" class="md-nav__link">
+      Ombi
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../qbittorrent/" class="md-nav__link">
+      Qbittorrent
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../radarr/" class="md-nav__link">
+      Radarr
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sonarr/" class="md-nav__link">
+      Sonarr
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../samba/" class="md-nav__link">
+      Samba
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sickchill/" class="md-nav__link">
+      SickChill
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../syncthing/" class="md-nav__link">
+      Synchthing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../transmission/" class="md-nav__link">
+      Transmission
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../webdavserver/" class="md-nav__link">
+      WebDAV
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-13" type="checkbox" id="nav-6-13" >
+    <label class="md-nav__link" for="nav-6-13">
+      Games
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Games" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-13">
+        <span class="md-nav__icon md-icon"></span>
+        Games
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../factorio/" class="md-nav__link">
+      Factorio
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../minecraft/" class="md-nav__link">
+      Minecraft
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../minecraftbedrockserver/" class="md-nav__link">
+      MinecraftBedrockServer
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-14" type="checkbox" id="nav-6-14" >
+    <label class="md-nav__link" for="nav-6-14">
+      Gateways and terminal sharing
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Gateways and terminal sharing" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-14">
+        <span class="md-nav__icon md-icon"></span>
+        Gateways and terminal sharing
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../guacamole/" class="md-nav__link">
+      Guacamole
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../webvirtmgr/" class="md-nav__link">
+      WebVirtMgr
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-15" type="checkbox" id="nav-6-15" >
+    <label class="md-nav__link" for="nav-6-15">
+      Media Streaming
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Media Streaming" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-15">
+        <span class="md-nav__icon md-icon"></span>
+        Media Streaming
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../airsonic/" class="md-nav__link">
+      Airsonic
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../beets/" class="md-nav__link">
+      Beets
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../emby/" class="md-nav__link">
+      Emby
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../jellyfin/" class="md-nav__link">
+      Jellyfin
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../massivedecks/" class="md-nav__link">
+      MassiveDecks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mstream/" class="md-nav__link">
+      Mstream
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../peertube/" class="md-nav__link">
+      Added PeerTube
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../plex/" class="md-nav__link">
+      Plex
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../funkwhale/" class="md-nav__link">
+      Funkwhale
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-16" type="checkbox" id="nav-6-16" >
+    <label class="md-nav__link" for="nav-6-16">
+      Misc/Other
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Misc/Other" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-16">
+        <span class="md-nav__icon md-icon"></span>
+        Misc/Other
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../adguardhome/" class="md-nav__link">
+      AdGuard Home
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../barcodebuddy/" class="md-nav__link">
+      BarcodeBuddy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../chowdown/" class="md-nav__link">
+      Chowdown
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../codimd/" class="md-nav__link">
+      CodiMD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../darksky/" class="md-nav__link">
+      Darksky
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../duckdns/" class="md-nav__link">
+      DuckDNS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ethercalc/" class="md-nav__link">
+      EtherCalc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../erpnext/" class="md-nav__link">
+      ERPNext
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../folding_at_home/" class="md-nav__link">
+      Folding@home
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gotify/" class="md-nav__link">
+      Gotify
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../grocy/" class="md-nav__link">
+      Grocy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../hubzilla/" class="md-nav__link">
+      Hubzilla
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../inventario/" class="md-nav__link">
+      Inventario
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../invoiceninja/" class="md-nav__link">
+      InvoiceNinja
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mashio/" class="md-nav__link">
+      Mashio
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../monica/" class="md-nav__link">
+      Monica
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../n8n/" class="md-nav__link">
+      n8n
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../nodered/" class="md-nav__link">
+      NodeRED
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../octoprint/" class="md-nav__link">
+      OctoPrint
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../pihole/" class="md-nav__link">
+      Pi-hole
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../poli/" class="md-nav__link">
+      Poli
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../privatebin/" class="md-nav__link">
+      PrivateBin
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../rsshub/" class="md-nav__link">
+      RssHub
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sabnzbd/" class="md-nav__link">
+      Sabnzbd
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../searx/" class="md-nav__link">
+      Searx
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shinobi/" class="md-nav__link">
+      Shinobi
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../simply-shorten/" class="md-nav__link">
+      Simply-Shorten
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ubooquity/" class="md-nav__link">
+      Ubooquity
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../unificontroller/" class="md-nav__link">
+      UnifiController
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../watchtower/" class="md-nav__link">
+      Watchtower
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../webtrees/" class="md-nav__link">
+      WebTrees
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../zammad/" class="md-nav__link">
+      Zammad
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-17" type="checkbox" id="nav-6-17" >
+    <label class="md-nav__link" for="nav-6-17">
+      Money, Budgeting and Management
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Money, Budgeting and Management" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-17">
+        <span class="md-nav__icon md-icon"></span>
+        Money, Budgeting and Management
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../firefly/" class="md-nav__link">
+      Firefly III
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-18" type="checkbox" id="nav-6-18" >
+    <label class="md-nav__link" for="nav-6-18">
+      Monitoring
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Monitoring" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-18">
+        <span class="md-nav__icon md-icon"></span>
+        Monitoring
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../system-cockpit/" class="md-nav__link">
+      Cockpit
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../elkstack/" class="md-nav__link">
+      ELKStack
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../grafana/" class="md-nav__link">
+      Grafana
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../healthchecks/" class="md-nav__link">
+      HealthChecks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../huginn/" class="md-nav__link">
+      Huginn
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../netdata/" class="md-nav__link">
+      Netdata
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../speedtest/" class="md-nav__link">
+      Speedtest
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../statping/" class="md-nav__link">
+      Statping
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tautulli/" class="md-nav__link">
+      Tautulli
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tick/" class="md-nav__link">
+      TICK
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-19" type="checkbox" id="nav-6-19" >
+    <label class="md-nav__link" for="nav-6-19">
+      Note-taking and Editors
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Note-taking and Editors" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-19">
+        <span class="md-nav__icon md-icon"></span>
+        Note-taking and Editors
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../bulletnotes/" class="md-nav__link">
+      BulletNotes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../trilium/" class="md-nav__link">
+      Trilium
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../turtl/" class="md-nav__link">
+      Turtl
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-20" type="checkbox" id="nav-6-20" >
+    <label class="md-nav__link" for="nav-6-20">
+      Password Managers
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Password Managers" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-20">
+        <span class="md-nav__icon md-icon"></span>
+        Password Managers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../bitwarden/" class="md-nav__link">
+      Bitwarden
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-21" type="checkbox" id="nav-6-21" >
+    <label class="md-nav__link" for="nav-6-21">
+      Personal Dashboards
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Personal Dashboards" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-21">
+        <span class="md-nav__icon md-icon"></span>
+        Personal Dashboards
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../heimdall/" class="md-nav__link">
+      Heimdall
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../homedash/" class="md-nav__link">
+      Homedash
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../organizr/" class="md-nav__link">
+      Organizr
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sui/" class="md-nav__link">
+      SUI
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-22" type="checkbox" id="nav-6-22" checked>
+    <label class="md-nav__link" for="nav-6-22">
+      Photo and Video Galleries
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Photo and Video Galleries" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-22">
+        <span class="md-nav__icon md-icon"></span>
+        Photo and Video Galleries
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../digikam/" class="md-nav__link">
+      Digikam
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        OwnPhotos
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
+      OwnPhotos
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#information" class="md-nav__link">
+    Information
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    SETUP
+  </a>
+  
+    <nav class="md-nav" aria-label="SETUP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enabling-ownphotos" class="md-nav__link">
+    Enabling ownphotos
+  </a>
+  
+    <nav class="md-nav" aria-label="Enabling ownphotos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#command" class="md-nav__link">
+    Command:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-alteration" class="md-nav__link">
+    File alteration:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finalising-changes" class="md-nav__link">
+    Finalising changes:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#first-run" class="md-nav__link">
+    FIRST RUN
+  </a>
+  
+    <nav class="md-nav" aria-label="FIRST RUN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#administrator-setup" class="md-nav__link">
+    ADMINISTRATOR SETUP
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#smtp-mail" class="md-nav__link">
+    SMTP/ MAIL
+  </a>
+  
+    <nav class="md-nav" aria-label="SMTP/ MAIL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#smtp-settings" class="md-nav__link">
+    SMTP Settings
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#access" class="md-nav__link">
+    ACCESS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#options" class="md-nav__link">
+    OPTIONS
+  </a>
+  
+    <nav class="md-nav" aria-label="OPTIONS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#https_only" class="md-nav__link">
+    HTTPS_ONLY
+  </a>
+  
+    <nav class="md-nav" aria-label="HTTPS_ONLY">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#command_1" class="md-nav__link">
+    Command:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-alteration_1" class="md-nav__link">
+    File alteration:
+  </a>
+  
+    <nav class="md-nav" aria-label="File alteration:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finalising-changes_1" class="md-nav__link">
+    Finalising changes:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#auth" class="md-nav__link">
+    AUTH
+  </a>
+  
+    <nav class="md-nav" aria-label="AUTH">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#command_2" class="md-nav__link">
+    Command:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-alteration_2" class="md-nav__link">
+    File alteration:
+  </a>
+  
+    <nav class="md-nav" aria-label="File alteration:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finalising-changes_2" class="md-nav__link">
+    Finalising changes:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#domain" class="md-nav__link">
+    DOMAIN
+  </a>
+  
+    <nav class="md-nav" aria-label="DOMAIN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#command_3" class="md-nav__link">
+    Command:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-alteration_3" class="md-nav__link">
+    File alteration:
+  </a>
+  
+    <nav class="md-nav" aria-label="File alteration:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finalising-changes_3" class="md-nav__link">
+    Finalising changes:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subdomain" class="md-nav__link">
+    SUBDOMAIN
+  </a>
+  
+    <nav class="md-nav" aria-label="SUBDOMAIN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#command_4" class="md-nav__link">
+    Command:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-alteration_4" class="md-nav__link">
+    File alteration:
+  </a>
+  
+    <nav class="md-nav" aria-label="File alteration:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finalising-changes_4" class="md-nav__link">
+    Finalising changes:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version" class="md-nav__link">
+    VERSION
+  </a>
+  
+    <nav class="md-nav" aria-label="VERSION">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#command_5" class="md-nav__link">
+    Command:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-alteration_5" class="md-nav__link">
+    File alteration:
+  </a>
+  
+    <nav class="md-nav" aria-label="File alteration:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finalising-changes_5" class="md-nav__link">
+    Finalising changes:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#need-more-help" class="md-nav__link">
+    Need more help?
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../photoprism/" class="md-nav__link">
+      PhotoPrism
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../piwigo/" class="md-nav__link">
+      Piwigo
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../pixelfed/" class="md-nav__link">
+      Pixelfed
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-23" type="checkbox" id="nav-6-23" >
+    <label class="md-nav__link" for="nav-6-23">
+      Read it Later Lists
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Read it Later Lists" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-23">
+        <span class="md-nav__icon md-icon"></span>
+        Read it Later Lists
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../wallabag/" class="md-nav__link">
+      Wallabag
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-24" type="checkbox" id="nav-6-24" >
+    <label class="md-nav__link" for="nav-6-24">
+      Social Networking
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Social Networking" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-24">
+        <span class="md-nav__icon md-icon"></span>
+        Social Networking
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../pleroma/" class="md-nav__link">
+      Pleroma
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-25" type="checkbox" id="nav-6-25" >
+    <label class="md-nav__link" for="nav-6-25">
+      Software Development
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Software Development" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-25">
+        <span class="md-nav__icon md-icon"></span>
+        Software Development
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../codeserver/" class="md-nav__link">
+      Codeserver
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../drone/" class="md-nav__link">
+      Drone
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gitea/" class="md-nav__link">
+      Gitea
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gitlab/" class="md-nav__link">
+      GitLab
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../jenkins/" class="md-nav__link">
+      Jenkins
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../snibox/" class="md-nav__link">
+      Snibox
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-26" type="checkbox" id="nav-6-26" >
+    <label class="md-nav__link" for="nav-6-26">
+      Task management/To-do lists
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Task management/To-do lists" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-26">
+        <span class="md-nav__icon md-icon"></span>
+        Task management/To-do lists
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../wekan/" class="md-nav__link">
+      Wekan
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-27" type="checkbox" id="nav-6-27" >
+    <label class="md-nav__link" for="nav-6-27">
+      VPN
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="VPN" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-27">
+        <span class="md-nav__icon md-icon"></span>
+        VPN
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../openvpn/" class="md-nav__link">
+      OpenVPN
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-28" type="checkbox" id="nav-6-28" >
+    <label class="md-nav__link" for="nav-6-28">
+      Webservers
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Webservers" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-28">
+        <span class="md-nav__icon md-icon"></span>
+        Webservers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../apache2/" class="md-nav__link">
+      Apache2
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-29" type="checkbox" id="nav-6-29" >
+    <label class="md-nav__link" for="nav-6-29">
+      Wikis
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Wikis" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-29">
+        <span class="md-nav__icon md-icon"></span>
+        Wikis
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../bookstack/" class="md-nav__link">
+      Bookstack
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tiddlywiki/" class="md-nav__link">
+      Tiddlywiki
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../core/Commands/" class="md-nav__link">
+      Commands
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8" >
+    <label class="md-nav__link" for="nav-8">
+      Development
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Development" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        <span class="md-nav__icon md-icon"></span>
+        Development
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../dev/Adding-Services/" class="md-nav__link">
+      Adding Services
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="/CONTRIBUTING.md" class="md-nav__link">
+      Contributing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../dev/Developer-Tips/" class="md-nav__link">
+      Dev Tips
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../dev/Vagrant/" class="md-nav__link">
+      Vagrant
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9" >
+    <label class="md-nav__link" for="nav-9">
+      About
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="About" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        <span class="md-nav__icon md-icon"></span>
+        About
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../About-VivumLab/" class="md-nav__link">
+      About VivumLab
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Required-jobs/" class="md-nav__link">
+      Required Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Contact-us/" class="md-nav__link">
+      Contact Us
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Code-of-Conduct/" class="md-nav__link">
+      Code of Conduct
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Legal/" class="md-nav__link">
+      Legal
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#information" class="md-nav__link">
+    Information
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    SETUP
+  </a>
+  
+    <nav class="md-nav" aria-label="SETUP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enabling-ownphotos" class="md-nav__link">
+    Enabling ownphotos
+  </a>
+  
+    <nav class="md-nav" aria-label="Enabling ownphotos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#command" class="md-nav__link">
+    Command:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-alteration" class="md-nav__link">
+    File alteration:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finalising-changes" class="md-nav__link">
+    Finalising changes:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#first-run" class="md-nav__link">
+    FIRST RUN
+  </a>
+  
+    <nav class="md-nav" aria-label="FIRST RUN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#administrator-setup" class="md-nav__link">
+    ADMINISTRATOR SETUP
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#smtp-mail" class="md-nav__link">
+    SMTP/ MAIL
+  </a>
+  
+    <nav class="md-nav" aria-label="SMTP/ MAIL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#smtp-settings" class="md-nav__link">
+    SMTP Settings
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#access" class="md-nav__link">
+    ACCESS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#options" class="md-nav__link">
+    OPTIONS
+  </a>
+  
+    <nav class="md-nav" aria-label="OPTIONS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#https_only" class="md-nav__link">
+    HTTPS_ONLY
+  </a>
+  
+    <nav class="md-nav" aria-label="HTTPS_ONLY">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#command_1" class="md-nav__link">
+    Command:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-alteration_1" class="md-nav__link">
+    File alteration:
+  </a>
+  
+    <nav class="md-nav" aria-label="File alteration:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finalising-changes_1" class="md-nav__link">
+    Finalising changes:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#auth" class="md-nav__link">
+    AUTH
+  </a>
+  
+    <nav class="md-nav" aria-label="AUTH">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#command_2" class="md-nav__link">
+    Command:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-alteration_2" class="md-nav__link">
+    File alteration:
+  </a>
+  
+    <nav class="md-nav" aria-label="File alteration:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finalising-changes_2" class="md-nav__link">
+    Finalising changes:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#domain" class="md-nav__link">
+    DOMAIN
+  </a>
+  
+    <nav class="md-nav" aria-label="DOMAIN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#command_3" class="md-nav__link">
+    Command:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-alteration_3" class="md-nav__link">
+    File alteration:
+  </a>
+  
+    <nav class="md-nav" aria-label="File alteration:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finalising-changes_3" class="md-nav__link">
+    Finalising changes:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subdomain" class="md-nav__link">
+    SUBDOMAIN
+  </a>
+  
+    <nav class="md-nav" aria-label="SUBDOMAIN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#command_4" class="md-nav__link">
+    Command:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-alteration_4" class="md-nav__link">
+    File alteration:
+  </a>
+  
+    <nav class="md-nav" aria-label="File alteration:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finalising-changes_4" class="md-nav__link">
+    Finalising changes:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version" class="md-nav__link">
+    VERSION
+  </a>
+  
+    <nav class="md-nav" aria-label="VERSION">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#command_5" class="md-nav__link">
+    Command:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-alteration_5" class="md-nav__link">
+    File alteration:
+  </a>
+  
+    <nav class="md-nav" aria-label="File alteration:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finalising-changes_5" class="md-nav__link">
+    Finalising changes:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#need-more-help" class="md-nav__link">
+    Need more help?
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/Vivumlab/VivumLab/blob/master/docs/software/ownphotos.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="ownphotos">OwnPhotos</h1>
+<p><a href="https://github.com/hooram/ownphotos">OwnPhotos</a> Self hosted Google Photos clone.</p>
+<p><img alt="amd64" src="https://img.shields.io/badge/untested-amd64-inactive?style=flat" />
+<img alt="arm64" src="https://img.shields.io/badge/untested-arm64-inactive?style=flat" />
+<img alt="armv7" src="https://img.shields.io/badge/untested-armv7-inactive?style=flat" /></p>
+<h2 id="information">Information</h2>
+<p><strong>Docker Image:</strong> !!! LINK TO DOCKER IMAGE/ DOCKER HUB !!!<br />
+<strong>Current Image Version:</strong> dev</p>
+<h2 id="setup">SETUP</h2>
+<h3 id="enabling-ownphotos">Enabling ownphotos</h3>
+<h4 id="command">Command:</h4>
+<p><strong><code>vlab set ownphotos.enable True</code></strong></p>
+<h4 id="file-alteration">File alteration:</h4>
+<p>set the appropriate service settings in <code>settings/config.yml</code> to true</p>
+<p>eg.
+<div class="highlight"><pre><span></span><code>ownphotos
+  enable: True
+</code></pre></div></p>
+<h4 id="finalising-changes">Finalising changes:</h4>
+<p>run: <strong><code>vlab update_one service=ownphotos</code></strong></p>
+<h2 id="first-run">FIRST RUN</h2>
+<p>!!! <strong>DEVELOPERS</strong>: make sure that you include any information that the user requires to get started, below. !!!</p>
+<p>!!! Below are some <strong>examples</strong> with headings, and with some <strong>example</strong> instructions !!!</p>
+<h4 id="administrator-setup">ADMINISTRATOR SETUP</h4>
+<p>Navigate to <em>https://False/admin</em></p>
+<p>Create an account with your desired username; as this is the first user, ownphotos makes this account the administrator.</p>
+<h4 id="smtp-mail">SMTP/ MAIL</h4>
+<ol>
+<li>
+<p>run <strong><code>vlab decrypt</code></strong> to decrypt the <code>vault.yml</code> file</p>
+</li>
+<li>
+<p>make some changes</p>
+</li>
+</ol>
+<h5 id="smtp-settings">SMTP Settings</h5>
+<div class="highlight"><pre><span></span><code>smtp:
+  host:
+  port:
+  user:
+  pass:
+  from_email:
+  from_name:
+</code></pre></div>
+<ol>
+<li>run <strong><code>vlab update_one service=ownphotos</code></strong> to complete the changes</li>
+</ol>
+<h2 id="access">ACCESS</h2>
+<p>ownphotos (HTTPS) link: <a href="https://ownphotos.vivumlab.xyz/">https://ownphotos.vivumlab.xyz/</a>
+ownphotos (HTTP) link: <a href="http://ownphotos.vivumlab.xyz/">http://ownphotos.vivumlab.xyz/</a></p>
+<h2 id="options">OPTIONS</h2>
+<h3 id="https_only">HTTPS_ONLY</h3>
+<p><em>Default: False</em>
+<em>Options: True/False</em></p>
+<h4 id="command_1">Command:</h4>
+<p><strong><code>vlab set ownphotos.https_only True</code></strong></p>
+<h4 id="file-alteration_1">File alteration:</h4>
+<p>set the appropriate service settings in <code>settings/config.yml</code> to true</p>
+<p>eg.
+<div class="highlight"><pre><span></span><code>ownphotos
+  https_only: True
+</code></pre></div></p>
+<h5 id="finalising-changes_1">Finalising changes:</h5>
+<p>run: <strong><code>vlab update_one service=ownphotos</code></strong></p>
+<h3 id="auth">AUTH</h3>
+<p><em>Default: False</em>
+<em>Options: True/False</em></p>
+<h4 id="command_2">Command:</h4>
+<p><strong><code>vlab set ownphotos.auth True</code></strong></p>
+<h4 id="file-alteration_2">File alteration:</h4>
+<p>set the appropriate service settings in <code>settings/config.yml</code> to true</p>
+<p>eg.
+<div class="highlight"><pre><span></span><code>ownphotos
+  auth: True
+</code></pre></div></p>
+<h5 id="finalising-changes_2">Finalising changes:</h5>
+<p>run: <strong><code>vlab update_one service=ownphotos</code></strong></p>
+<h3 id="domain">DOMAIN</h3>
+<p><em>Default: False</em>
+<em>NOTE: include the sitename and top level domain suffix. eg. name.com, site.net</em></p>
+<h4 id="command_3">Command:</h4>
+<p><strong><code>vlab set ownphotos.domain ownphotos.com</code></strong></p>
+<h4 id="file-alteration_3">File alteration:</h4>
+<p>set the appropriate service settings in <code>settings/config.yml</code> to true</p>
+<p>eg.
+<div class="highlight"><pre><span></span><code>ownphotos
+  domain: ownphotos.com
+</code></pre></div></p>
+<h5 id="finalising-changes_3">Finalising changes:</h5>
+<p>run: <strong><code>vlab update_one service=ownphotos</code></strong></p>
+<h3 id="subdomain">SUBDOMAIN</h3>
+<p><em>Default: ownphotos</em>
+<em>NOTE: Periods/ delimiters are not required. eg. 'media' will set the full URL as 'media.vivumlab.xyz'</em></p>
+<h4 id="command_4">Command:</h4>
+<p><strong><code>vlab set ownphotos.subdomain media</code></strong></p>
+<h4 id="file-alteration_4">File alteration:</h4>
+<p>set the appropriate service settings in <code>settings/config.yml</code> to true</p>
+<p>eg.
+<div class="highlight"><pre><span></span><code>ownphotos
+  subdomain: media
+</code></pre></div></p>
+<h5 id="finalising-changes_4">Finalising changes:</h5>
+<p>run: <strong><code>vlab update_one service=ownphotos</code></strong></p>
+<h3 id="version">VERSION</h3>
+<p><em>Default: dev</em>
+<em>NOTE: Ensure that the version exists</em></p>
+<h4 id="command_5">Command:</h4>
+<p><strong><code>vlab set ownphotos.version 2.7</code></strong></p>
+<h4 id="file-alteration_5">File alteration:</h4>
+<p>set the appropriate service settings in <code>settings/config.yml</code> to true</p>
+<p>eg.
+<div class="highlight"><pre><span></span><code>ownphotos
+  version: 2.7
+</code></pre></div></p>
+<h5 id="finalising-changes_5">Finalising changes:</h5>
+<p>run: <strong><code>vlab update_one service=ownphotos</code></strong></p>
+<h2 id="need-more-help">Need more help?</h2>
+<p>Further information regarding services can be found. \
+General Information can be found in the <a href="https://docs.vivumlab.com">documentation</a>. \
+Additional assistance can be found on our <a href="https://docs.vivumlab.com/Contact-us">Contact Us</a> page.</p>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 2, 2020</span>
+    
+  </small>
+</div>
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../digikam/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Digikam
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../photoprism/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                PhotoPrism
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.fd16492e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: ['instant'],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
