@@ -1,0 +1,20 @@
+name: "Trigger release"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Mirror action step
+        if: github.actor == github.event.repository.owner.login
+        id: mirror
+        uses: google/mirror-branch-action@v1.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          source: 'dev'
+          dest: 'master'
