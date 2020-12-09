@@ -1,3 +1,10 @@
+### [0.5.1](https://github.com/VivumLab/VivumLab/compare/v0.5.0...v0.5.1) (2020-12-09)
+
+
+### Bug Fixes
+
+* **ci:** fix docker-publish workflow ([#212](https://github.com/VivumLab/VivumLab/issues/212)) ([e5b2de9](https://github.com/VivumLab/VivumLab/commit/e5b2de9443a8750ee8ba5f20fa5cbdead5d63086))
+
 ## [0.5.0](https://github.com/VivumLab/VivumLab/compare/v0.4.0...v0.5.0) (2020-12-09)
 
 
