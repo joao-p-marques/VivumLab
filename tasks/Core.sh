@@ -45,15 +45,12 @@ Task::build() {
 
   if [[ -v "already_ran[${FUNCNAME[0]}]" ]] ;  then return ; fi
 
-  vlab_dockerimagver=$(docker images -a | grep "vivumlab/vivumlab" | awk '{print $2}')
-  vlab_dockerimagid=$(docker images -a | grep "vivumlab/vivumlab" | awk '{print $3}')
+  vlab_dockerimagver=$(docker images --filter reference=vivumlab/vivumlab | grep "${VERSION_CURRENT}" | awk '{print $2}')
+  vlab_dockerimagid=$(docker images --filter reference=vivumlab/vivumlab | grep "${VERSION_CURRENT}" | awk '{print $3}')
 
-  if [[ ${vlab_dockerimagver} == "latest" ]]; then
-    sudo docker rmi --force ${vlab_dockerimagver}
-  fi
-  if [[ $VERSION_CURRENT == $VERSION_LATEST ]] ; then
-    VERSION_DOCKER=${VERSION_LATEST}
-  fi
+  # if [[ ${vlab_dockerimagver} != ${VERSION_CURRENT} ]]; then
+  #   sudo docker rmi --force ${vlab_dockerimagid}
+  # fi
 
   function build_cache() {
     if [[ ${_cache-true} == true ]]; then
@@ -69,18 +66,16 @@ Task::build() {
     fi
   fi
 
-
-
   highlight "Getting VivumLab Docker Image"
-  if [[ ! ${vlab_dockerimagid} == "" ]] && [[ ${VERSION_DOCKER} == "latest" ]]; then
+  if [[ ! ${vlab_dockerimagid} == "" ]] && [[ ${VERSION_CURRENT} == ${VERSION_LATEST} ]]; then
     colorize light_yellow "Image number: ${vlab_dockerimagid}"
     colorize light_yellow "is the latest vlab image"
     colorize light_blue "Skipping vlab image retrieval"
   else
     if [[ ${_build-true} == true ]]; then
-      sudo docker build . $(build_cache) -t vivumlab/vivumlab:$VERSION_DOCKER
+      sudo docker build . $(build_cache) -t vivumlab/vivumlab:${VERSION_CURRENT}
     else
-      sudo docker pull vivumlab/vivumlab:$VERSION_DOCKER
+      sudo docker pull vivumlab/vivumlab:${VERSION_CURRENT}
     fi
   fi
 }
@@ -183,60 +178,6 @@ Task::restore() {
   Task::run_docker ansible-playbook $(debug_check) $(sshkey_path) \
   --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
   -i inventory restore.yml  || colorize red "error: restore"
-}
-
-# CI - Updates the config file, and ensures the vault is encrypted.
-Task::ci(){
-  : @param config_dir="settings_ci"
-  : @param force true "Forces a rebuild/repull of the docker image"
-  : @param build true "Forces to build the image locally"
-  : @param debug true "Debugs ansible-playbook commands"
-  : @param cache true "Allows the build to use the cache"
-
-  Task::logo_local
-  Task::build $(build_check) $(force_check) $(cache_check)
-
-  mkdir -p $_config_dir/passwords
-  [ -f ~/.vlab_vault_pass ] || Task::generate_ansible_pass
-
-  if [[ ! -d $_config_dir ]]; then
-      colorize light_red "Creating settings directory"
-      mkdir -p $_config_dir
-  fi
-  if  [[ ! -d $_config_dir/passwords ]]; then
-      colorize light_red "Creating passwords directory"
-      mkdir -p $_config_dir/passwords
-  fi
-  if [[ ! -f $_config_dir/config.yml ]]; then
-      colorize light_red "Creating an empty config file"
-      echo "blank_on_purpose: True" > $_config_dir/config.yml
-  fi
-  if [[ ! -f $_config_dir/vault.yml ]]; then
-      colorize light_red "Creating an empty Vault"
-      echo "blank_on_purpose: True" > $_config_dir/vault.yml
-  fi
-  if [[ ! -f tasks/ansible_bash.vars ]]; then
-    colorize light_red "Creating ansible_bash.vars file"
-    echo "PASSWORDLESS_SSHKEY=''" > tasks/ansible_bash.vars
-  fi
-
-  highlight "Creating or Updating ci config file"
-  mkdir -p $_config_dir/passwords
-  [ -f ~/.vlab_vault_pass ] || Task::generate_ansible_pass
-
-  Task::run_docker ansible-playbook $(debug_check) \
-  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-  -i inventory playbook.ci_config.yml || colorize red "error: ci_config"
-  highlight "End Creating or Updating ci config file"
-  highlight "Encrypting Secrets in the Vault"
-  Task::run_docker ansible-vault encrypt $_config_dir/vault.yml || colorize red "error: ci_config: encrypt"
-  highlight "End Encrypting Secrets in the Vault"
-
-  highlight "Copying files"
-  Task::run_docker ansible-playbook $(debug_check) \
-  --extra-vars="@$_config_dir/config.yml" --extra-vars="@$_config_dir/vault.yml" \
-  -i inventory playbook.ci.yml || colorize red "error: ci"
-  highlight "End Copying files"
 }
 
 Task::run_docker() {
