@@ -1,0 +1,50 @@
+---
+- name: Create required directories.
+  file:
+    path: "{{ volumes_root }}/{{ item }}"
+    state: directory
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  loop:
+    - portus
+    - portus/secrets
+    - portus/secrets-registry
+    - portus/mariadb
+    - portus/registry
+    - portus/registry/data
+    - portus/clair
+  become: yes
+
+- name: Copy registry/config.yml into place
+  copy:
+    src: "registry/config.yml"
+    dest: "{{ volumes_root }}/portus/registry/config.yml"
+
+- name: Copy registry/init into place
+  copy:
+    src: "registry/init"
+    dest: "{{ volumes_root }}/portus/registry/init"
+
+- name: Copy registry/init into place
+  copy:
+    src: "clair.yml"
+    dest: "{{ volumes_root }}/portus/clair/clair.yml"
+
+- name: Copy portus docker-compose.yml file into place.
+  template:
+    src: docker-compose.portus.yml.j2
+    dest: "{{ volumes_root }}/portus/docker-compose.yml"
+
+- name: Configure portus systemd service.
+  become: yes
+  template:
+    src: service.j2
+    dest: /etc/systemd/system/portus.service
+
+- name: Start portus
+  systemd:
+    name: portus
+    enabled: yes
+    daemon-reload: yes
+    state: started
+  become: yes

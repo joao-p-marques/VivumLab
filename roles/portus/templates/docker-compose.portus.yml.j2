@@ -1,0 +1,224 @@
+#jinja2: trim_blocks:False
+---
+version: '2'
+
+networks:
+  traefik_network:
+    external:
+      name: vivumlab_traefik
+  portus:
+  clair:
+
+services:
+  portus:
+    image: opensuse/portus:{{ portus.version }}
+    container_name: portus
+    restart: unless-stopped
+    networks:
+      - portus
+      - traefik_network
+    environment:
+      - CCONFIG_PREFIX=PORTUS
+      - PORTUS_MACHINE_FQDN_VALUE={{ service_domain }}
+      - PORTUS_SECURITY_CLAIR_SERVER=http://clair:6060
+
+      # DB. The password for the database should definitely not be here. You are
+      # probably better off with Docker Swarm secrets.
+      - PORTUS_DB_HOST=db
+      - PORTUS_DB_DATABASE=portus_production
+      - PORTUS_DB_PASSWORD={{lookup('password', './settings/passwords/portus_db_password chars=ascii_letters')}}
+      - PORTUS_DB_POOL=5
+
+      # Secrets. It can possibly be handled better with Swarm's secrets.
+      - PORTUS_SECRET_KEY_BASE={{lookup('password', './settings/passwords/portus_secret_key_base chars=ascii_letters')}}
+      - PORTUS_KEY_PATH=/certificates/portus.key
+      - PORTUS_PASSWORD={{lookup('password', './settings/passwords/portus_password chars=ascii_letters')}}
+
+      # SSL
+      - PORTUS_CHECK_SSL_USAGE_ENABLED='false'
+
+      # Since we have no nginx in insecure mode, portus have to
+      # serve the static files
+      - RAILS_SERVE_STATIC_FILES='true'
+
+      # SMTP Mail
+      - PORTUS_EMAIL_FROM={{ smtp.from_email }}
+      - PORTUS_EMAIL_NAME={{ smtp.from_name }}
+      - PORTUS_EMAIL_SMTP_ENABLED='true'
+      - PORTUS_EMAIL_SMTP_ADDRESS={{ smtp.host }}
+      - PORTUS_EMAIL_SMTP_PORT={{ smtp.port }}
+      - PORTUS_EMAIL_SMTP_DOMAIN={{ smtp.host }}
+      - PORTUS_EMAIL_SMTP_USER_NAME={{ smtp.user }}
+      - PORTUS_EMAIL_SMTP_PASSWORD={{ smtp.pass }}
+      - PORTUS_EMAIL_SMTP_ENABLE_STARTTLS_AUTO='true'
+      - PORTUS_EMAIL_SMTP_OPENSSL_VERIFY_MODE="none"
+
+      # Gravatar
+      - PORTUS_GRAVATAR_ENABLED='true'
+    depends_on:
+      - db
+    volumes:
+      - "{{ volumes_root }}/portus/secrets:/certificates:ro"
+    labels:
+      - "traefik.http.services.portus.loadbalancer.server.scheme=http"
+      - "traefik.http.services.portus.loadbalancer.server.port=3000"
+{% include './labels.j2' %}
+
+  background:
+    image: opensuse/portus:{{ portus.version }}
+    container_name: portus-background
+    networks:
+      - portus
+    depends_on:
+      - portus
+      - db
+    environment:
+      # Theoretically not needed, but cconfig's been buggy on this...
+      - CCONFIG_PREFIX=PORTUS
+      - PORTUS_MACHINE_FQDN_VALUE={{ service_domain }}
+      - PORTUS_SECURITY_CLAIR_SERVER=http://clair:6060
+
+      # DB. The password for the database should definitely not be here. You are
+      # probably better off with Docker Swarm secrets.
+      - PORTUS_DB_HOST=db
+      - PORTUS_DB_DATABASE=portus_production
+      - PORTUS_DB_PASSWORD={{lookup('password', './settings/passwords/portus_db_password chars=ascii_letters')}}
+      - PORTUS_DB_POOL=5
+
+      # Secrets. It can possibly be handled better with Swarm's secrets.
+      - PORTUS_SECRET_KEY_BASE={{lookup('password', './settings/passwords/portus_secret_key_base chars=ascii_letters')}}
+      - PORTUS_KEY_PATH=/certificates/key.pem
+      - PORTUS_PASSWORD={{lookup('password', './settings/passwords/portus_password chars=ascii_letters')}}
+
+      - PORTUS_BACKGROUND=true
+    volumes:
+      - "{{ volumes_root }}/portus/secrets:/certificates:ro"
+
+  db:
+    image: library/mariadb:10.1
+    container_name: portus-db
+    #command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci --init-connect='SET NAMES UTF8;' --innodb-flush-log-at-trx-commit=0
+    networks:
+      - portus
+    environment:
+      - MYSQL_DATABASE=portus_production
+
+      # Again, the password shouldn't be handled like this.
+      - MYSQL_ROOT_PASSWORD={{lookup('password', './settings/passwords/portus_db_password chars=ascii_letters')}}
+    volumes:
+      - "{{ volumes_root }}/portus/mariadb:/var/lib/mysql"
+
+  portus-certdumper:
+    image: humenius/traefik-certs-dumper
+    restart: unless-stopped
+    container_name: portus-certdumper
+    command: --restart-containers portus,background
+    network_mode: none
+    volumes:
+      # mount the folder which contains Traefik's `acme.json' file
+      - "{{ volumes_root }}/traefik:/traefik:ro"
+      # mount SSL folder
+      - "{{ volumes_root }}/portus/secrets/:/output:rw"
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      # only change this, if you're using another domain for web frontend compared to the standard config
+      - DOMAIN={{ service_domain }}
+
+  registry:
+    image: library/registry:2.6
+    container_name: portus-registry
+    networks:
+      - portus
+      - traefik_network
+    environment:
+      # Authentication
+      REGISTRY_AUTH_TOKEN_REALM: https://{{ service_domain }}/v2/token
+      REGISTRY_AUTH_TOKEN_SERVICE: {{ service_domain }}
+      REGISTRY_AUTH_TOKEN_ISSUER: {{ service_domain }}
+      REGISTRY_AUTH_TOKEN_ROOTCERTBUNDLE: /secrets/cert.pem
+
+{% if portus.domain_registry != "False" %}
+      # SSL
+      REGISTRY_HTTP_TLS_CERTIFICATE: /secrets/cert.pem
+      REGISTRY_HTTP_TLS_KEY: /secrets/key.pem
+{% endif %}
+
+      # Portus endpoint
+      REGISTRY_NOTIFICATIONS_ENDPOINTS: >
+        - name: portus
+          url: https://{{ service_domain }}/v2/webhooks/events
+          timeout: 2000ms
+          threshold: 5
+          backoff: 1s
+    volumes:
+      - "{{ volumes_root }}/portus/registry/data:/var/lib/registry"
+      - "{{ volumes_root }}/portus/secrets-registry:/secrets:ro"
+      - "{{ volumes_root }}/portus/registry/config.yml:/etc/docker/registry/config.yml:ro"
+      - "{{ volumes_root }}/portus/registry/init:/etc/docker/registry/init:ro"
+{% if portus.domain_registry == "False" %}
+    ports:
+      - 5000:5000
+      - 5001:5001 # required to access debug service
+{% else %}
+    labels:
+      - "traefik.http.services.registry.loadbalancer.server.port=5000"
+      - "traefik.tcp.services.registry.loadbalancer.server.port=5000"
+      - "traefik.enable=true"
+      - "traefik.docker.network=vivumlab_traefik"
+      - "traefik.http.routers.registry-http.service=registry"
+      - "traefik.http.routers.registry-http.rule=Host(`{{ portus.domain_registry }}`)"
+      - "traefik.http.routers.registry-http.entrypoints=http"
+      - "traefik.http.routers.registry-http.middlewares={% if https_only == True %}redirect@file, {% else %}{% if auth == True %}{% if authelia.enable %}authelia@file{% else %}basicAuth@file{% endif %}{% endif %}{% endif %}"
+      - "traefik.tcp.routers.registry.service=registry"
+      - "traefik.tcp.routers.registry.rule=Host(`{{ portus.domain_registry }}`)"
+      - "traefik.tcp.routers.registry.entrypoints=https"
+      - "traefik.tcp.routers.registry.middlewares={% if auth == True %}{% if authelia.enable %}authelia@file{% else %}basicAuth@file{% endif %}{% endif %}"
+      - "traefik.tcp.routers.registry.tls=true"
+{% if traefik.dns_challenge_provider %}
+      - "traefik.tcp.routers.registry.tls.domains[0].main={{ portus.domain_registry }}"
+{% else %}
+      - "traefik.tcp.routers.registry.tls.certresolver=http"
+{% endif %}
+{% endif %}
+
+  clair:
+    image: quay.io/projectquay/clair:4.0.0
+    container_name: portus-clair
+    networks:
+      - portus
+      - clair
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    #ports:
+    #  - "6060-6061:6060-6061"
+    volumes:
+      - /tmp:/tmp
+      - "{{ volumes_root }}/portus/clair/clair.yml:/clair.yml"
+    command: [-conf, /clair.yml]
+
+  postgres:
+    image: library/postgres:10-alpine
+    container_name: portus-clair-db
+    networks:
+      - clair
+    environment:
+      POSTGRES_PASSWORD: portus
+
+{% if portus.domain_registry != "False" %}
+  registry-certdumper:
+    image: humenius/traefik-certs-dumper
+    restart: unless-stopped
+    container_name: portus-registry-certdumper
+    command: --restart-containers registry
+    network_mode: none
+    volumes:
+      # mount the folder which contains Traefik's `acme.json' file
+      - "{{ volumes_root }}/traefik:/traefik:ro"
+      # mount SSL folder
+      - "{{ volumes_root }}/portus/secrets_registry/:/output:rw"
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      # only change this, if you're using another domain for web frontend compared to the standard config
+      - DOMAIN={{ portus.domain_registry }}
+{%- endif %}

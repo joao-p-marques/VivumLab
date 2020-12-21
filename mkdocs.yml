@@ -49,6 +49,7 @@ nav:
           - Zulip: software/zulip.md
       - Docker & VM Management:
           - Portainer: software/portainer.md
+          - Portus: software/portus.md
           - Taisun: software/taisun.md
       - Document Management:
           - Mayan: software/mayan.md

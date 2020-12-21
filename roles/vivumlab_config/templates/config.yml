@@ -1172,6 +1172,17 @@ portainer:
   amd64: False
   arm64: False
   armv7: False
+portus:
+  enable: {{ portus.enable | default(False) }}
+  https_only: {{ portus.https_only | default(False) }}
+  auth: {{ portus.auth | default(False) }}
+  domain: {{ portus.domain | default(False) }}
+  domain_registry: {{ portus.domain_registry | default(False) }}
+  subdomain: {{ portus.subdomain | default("portus") }}
+  version: {{ portus.version | default("head") }}
+  amd64: False
+  arm64: False
+  armv7: False
 privatebin:
   enable: {{ privatebin.enable | default(False) }}
   https_only: {{ privatebin.https_only | default(False) }}
