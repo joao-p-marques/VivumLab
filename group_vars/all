@@ -63,7 +63,7 @@ services:
   minio:
   monicahq:
   mstream:
-  mylar:
+  mylar3:
   n8n:
   netdata:
   nextcloud:
@@ -186,7 +186,7 @@ miniflux:
 minio:
 monicahq:
 mstream:
-mylar:
+mylar3:
 n8n:
 netdata:
 nextcloud:
