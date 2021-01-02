@@ -90,7 +90,7 @@ module.exports = {
         'software/minio',
         'software/monica',
         'software/mstream',
-        'software/mylar',
+        'software/mylar3',
         'software/n8n',
         'software/netdata',
         'software/nextcloud',
