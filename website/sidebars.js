@@ -110,6 +110,7 @@ module.exports = {
         'software/plex',
         'software/poli',
         'software/portainer',
+        'software/portus',
         'software/privatebin',
         'software/qbittorrent',
         'software/radarr',
