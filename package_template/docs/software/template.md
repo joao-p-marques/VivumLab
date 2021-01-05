@@ -1,3 +1,17 @@
+---
+id: package_filename
+title: PackageTitleCase
+hide_title: true
+hide_table_of_contents: false
+sidebar_label: PackageTitleCase
+custom_edit_url: https://github.com/VivumLab/VivumLab/issues/new?template=documentation.md
+#description: How do I find you when I cannot solve this problem
+#keywords:
+#  - docs
+#  - docusaurus
+#image: https://i.imgur.com/mErPwqL.png
+---
+
 # PackageTitleCase
 
 [PackageTitleCase](PackageURL) PackageOneLiner

@@ -5,3 +5,6 @@ package_filename:
   domain: {{ package_filename.domain | default(False) }}
   subdomain: {{ package_filename.subdomain | default("package_filename") }}
   version: {{ package_filename.version | default("latest") }}
+  amd64: False
+  arm64: False
+  armv7: False
