@@ -14,16 +14,20 @@ class Config < Thor
     invoke 'sanity_checks:local'
     if File.exist? "settings/#{options[:config_dir]}/encrypted.yml"
       write_temporary_decrypted_config
-      FileUtils.mv @temp_config, "decrypted.yml"
+      FileUtils.mv @temp_config, 'decrypted.yml'
       say I18n.t('config.decrypt.out.decrypted').green
-      run_config_playbook(options, "-e @decrypted.yml")
-      encrypt_temporary_decrypted_config "decrypted.yml"
+      run_config_playbook(options, '-e @decrypted.yml')
+      encrypt_temporary_decrypted_config 'decrypted.yml'
+      # rubocop:disable Style/IdenticalConditionalBranches
       say I18n.t('config.encrypt.out.encrypted').green
+      # rubocop:enable Style/IdenticalConditionalBranches
     else
       FileUtils.mkdir_p "settings/#{options[:config_dir]}/passwords" unless Dir.exist? "settings/#{options[:config_dir]}/passwords"
       run_config_playbook(options)
-      encrypt_temporary_decrypted_config "decrypted.yml"
+      encrypt_temporary_decrypted_config 'decrypted.yml'
+      # rubocop:disable Style/IdenticalConditionalBranches
       say I18n.t('config.encrypt.out.encrypted').green
+      # rubocop:enable Style/IdenticalConditionalBranches
     end
   end
 
