@@ -19,21 +19,33 @@
   copy:
     src: "registry/config.yml"
     dest: "{{ volumes_root }}/portus/registry/config.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
 
 - name: Copy registry/init into place
   copy:
     src: "registry/init"
     dest: "{{ volumes_root }}/portus/registry/init"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
 
-- name: Copy registry/init into place
+- name: Copy clair/clair.yml into place
   copy:
     src: "clair.yml"
     dest: "{{ volumes_root }}/portus/clair/clair.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
 
 - name: Copy portus docker-compose.yml file into place.
   template:
     src: docker-compose.portus.yml.j2
     dest: "{{ volumes_root }}/portus/docker-compose.yml"
+    owner: "{{ uid_output.stdout }}"
+    group: "{{ gid_output.stdout }}"
+  become: yes
 
 - name: Configure portus systemd service.
   become: yes
