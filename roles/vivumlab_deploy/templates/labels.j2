@@ -11,7 +11,7 @@
       - "traefik.http.routers.{{ service_item }}.tls=true"
 {% if traefik.dns_challenge_provider %}
       - "traefik.http.routers.{{ service_item }}.tls.certresolver=dns"
-{% if custom_domain != False %}
+{% if custom_domain %}
       - "traefik.http.routers.{{ service_item }}.tls.domains[0].main={{ service_domain }}"
 {% else %}
       - "traefik.http.routers.{{ service_item }}.tls.domains[0].main={{ domain }}"

@@ -1135,6 +1135,7 @@ portus:
   domain_registry: {{ portus.domain_registry | default(False) }}
   subdomain: {{ portus.subdomain | default("portus") }}
   version: {{ portus.version | default("head") }}
+  debug: {{ portus.debug | default(False) }}
   amd64: False
   arm64: False
   armv7: False

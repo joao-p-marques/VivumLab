@@ -62,7 +62,33 @@ services:
     labels:
       - "traefik.http.services.portus.loadbalancer.server.scheme=http"
       - "traefik.http.services.portus.loadbalancer.server.port=3000"
-{% include './labels.j2' %}
+      - "traefik.enable=true"
+      - "traefik.docker.network=vivumlab_traefik"
+      - "traefik.http.routers.portus-http.service=portus"
+      - "traefik.http.routers.portus-http.rule=Host(`{{ service_domain }}`)" && (PathPrefix(`/ui`)
+      - "traefik.http.routers.portus-http.entrypoints=http"
+      - "traefik.http.routers.portus-http.middlewares={% if portus.https_only == True %}redirect@file{% else %}{% if portus.auth == True %}{% if authelia.enable %}{% if portus.https_only == True %}, {% endif %}authelia@file{% else %}basicAuth@file{% endif %}{% endif %}{% endif %}"
+      - "traefik.http.routers.portus.service=portus"
+      - "traefik.http.routers.portus.rule=Host(`{{ service_domain }}`)"
+      - "traefik.http.routers.portus.entrypoints=https"
+      - "traefik.http.routers.portus.middlewares={% if portus.auth == True %}{% if authelia.enable %}authelia@file{% else %}basicAuth@file{% endif %}{% endif %}{% if nextcloud.enable %}{% if portus.auth == True %}, {% endif %}{% if portus.https_only == True %}security-headers@file, {% endif %}nextcloud-redirectregex@file{% endif %}"
+      - "traefik.http.routers.portus.tls=true"
+{% if traefik.dns_challenge_provider %}
+      - "traefik.http.routers.portus.tls.certresolver=dns"
+{% if portus.custom_domain %}
+      - "traefik.http.routers.portus.tls.domains[0].main={{ service_domain }}"
+{% else %}
+      - "traefik.http.routers.portus.tls.domains[0].main={{ domain }}"
+      - "traefik.http.routers.portus.tls.domains[0].sans=*.{{ domain }}"
+{% endif %}
+{% else %}
+      - "traefik.http.routers.portus.tls.certresolver=http"
+{% endif %}
+{% if enable_tor %}
+      - "traefik.http.routers.portus-tor-http.rule=Host(`{{ portus.subdomain }}.{{ tor_domain }}`)"
+      - "traefik.http.routers.portus-tor-http.entrypoints=http"
+      - "traefik.http.routers.portus-tor-http.middlewares={% if portus.auth == True %}{% if authelia.enable %}authelia-tor@file{% else %}basicAuth@file{% endif %}, {% endif %}"
+{% endif %}
 
   background:
     image: opensuse/portus:{{ portus.version }}
@@ -138,11 +164,9 @@ services:
       REGISTRY_AUTH_TOKEN_ROOTCERTBUNDLE: /secrets/cert.pem
       REGISTRY_HTTP_SECRET: {{ lookup('password', './settings/prod/passwords/portus_registry_http_secret chars=ascii_letters') }}
 
-{% if portus.domain_registry %}
       # SSL
-      REGISTRY_HTTP_TLS_CERTIFICATE: /secrets2/cert.pem
-      REGISTRY_HTTP_TLS_KEY: /secrets2/key.pem
-{% endif %}
+      REGISTRY_HTTP_TLS_CERTIFICATE: /secrets/cert.pem
+      REGISTRY_HTTP_TLS_KEY: /secrets/key.pem
 
       # Portus endpoint
       REGISTRY_NOTIFICATIONS_ENDPOINTS: >
@@ -154,30 +178,23 @@ services:
     volumes:
       - "{{ volumes_root }}/portus/registry/data:/var/lib/registry"
       - "{{ volumes_root }}/portus/secrets:/secrets:ro"
-      - "{{ volumes_root }}/portus/secrets-registry:/secrets2:ro"
       - "{{ volumes_root }}/portus/registry/config.yml:/etc/docker/registry/config.yml:ro"
       - "{{ volumes_root }}/portus/registry/init:/etc/docker/registry/init:ro"
-{% if portus.domain_registry %}
     labels:
-      - "traefik.http.services.registry.loadbalancer.server.port=5000"
       - "traefik.tcp.services.registry.loadbalancer.server.port=5000"
       - "traefik.enable=true"
       - "traefik.docker.network=vivumlab_traefik"
-      - "traefik.http.routers.registry-http.service=registry"
-      - "traefik.http.routers.registry-http.rule=Host(`{{ portus.domain_registry }}`)"
-      - "traefik.http.routers.registry-http.entrypoints=http"
-      - "traefik.http.routers.registry-http.middlewares={% if https_only == True %}redirect@file, {% else %}{% if auth == True %}{% if authelia.enable %}authelia@file{% else %}basicAuth@file{% endif %}{% endif %}{% endif %}"
       - "traefik.tcp.routers.registry.service=registry"
-      - "traefik.tcp.routers.registry.rule=Host(`{{ portus.domain_registry }}`)"
+      - "traefik.tcp.routers.registry.rule=Host(`{{ service_domain }}`)"
       - "traefik.tcp.routers.registry.entrypoints=https"
-      - "traefik.tcp.routers.registry.middlewares={% if auth == True %}{% if authelia.enable %}authelia@file{% else %}basicAuth@file{% endif %}{% endif %}"
       - "traefik.tcp.routers.registry.tls=true"
+      - "traefik.tcp.routers.registry.tls.passthrough=true"
 {% if traefik.dns_challenge_provider %}
-      - "traefik.tcp.routers.registry.tls.domains[0].main={{ portus.domain_registry }}"
+      - "traefik.tcp.routers.registry.tls.domains[0].main={{ service_domain }}"
 {% else %}
       - "traefik.tcp.routers.registry.tls.certresolver=http"
 {% endif %}
-{% else %}
+{% if portus.debug %}
     ports:
       - 5000:5000
       - 5001:5001 # required to access debug service
@@ -206,21 +223,3 @@ services:
       - clair
     environment:
       POSTGRES_PASSWORD: portus
-
-{% if portus.domain_registry %}
-  registry-certdumper:
-    image: humenius/traefik-certs-dumper
-    restart: unless-stopped
-    container_name: portus-registry-certdumper
-    command: --restart-containers registry
-    network_mode: none
-    volumes:
-      # mount the folder which contains Traefik's `acme.json' file
-      - "{{ volumes_root }}/traefik:/traefik:ro"
-      # mount SSL folder
-      - "{{ volumes_root }}/portus/secrets_registry/:/output:rw"
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    environment:
-      # only change this, if you're using another domain for web frontend compared to the standard config
-      DOMAIN: {{ portus.domain_registry }}
-{%- endif %}
