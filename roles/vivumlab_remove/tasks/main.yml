@@ -1,13 +1,4 @@
 ---
-- name: remove enable services.
-  file:
-    state: absent
-    path: "{{ volumes_root }}/{{ service_item }}"
-  when: confirm_remove | bool
-  loop: "{{ services|flatten(levels=1) }}"
-  loop_control:
-    loop_var: service_item
-
 - name: Ensure disabled services are not running
   systemd:
     name: "{{ service_item }}"
@@ -19,9 +10,8 @@
     loop_var: service_item
   ignore_errors: yes
   vars:
-    query: "not {{ vars[service_item]['enable'] }}"
+    query: "{{ vars[service_item]['enable'] }}"
   become: yes
-
 
 - name: remove enable services.
   file:
@@ -32,9 +22,20 @@
   loop_control:
     loop_var: service_item
 
-- when: confirm_remove|bool
+- name: remove enable services.
+  file:
+    state: absent
+    path: "{{ volumes_root }}/{{ service_item }}"
+  when: confirm_remove | bool
+  loop: "{{ services|flatten(levels=1) }}"
+  loop_control:
+    loop_var: service_item
+
+- name: Message Service removed
+  when: confirm_remove | bool
   debug:
     msg: "Package removed successfully! Go to https://{{ domain }}/ to get started."
 
-- debug:
+- name: Message Service Removed Problems
+  debug:
     msg: "Problems? File an issue at https://github.com/Vivumlab/VivumLab/issues"
