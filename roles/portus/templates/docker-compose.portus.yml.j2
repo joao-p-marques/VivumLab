@@ -65,17 +65,17 @@ services:
       - "traefik.enable=true"
       - "traefik.docker.network=vivumlab_traefik"
       - "traefik.http.routers.portus-http.service=portus"
-      - "traefik.http.routers.portus-http.rule=Host(`{{ service_domain }}`)" && (PathPrefix(`/ui`)
+      - "traefik.http.routers.portus-http.rule=Host(`{{ service_domain }}`) && PathPrefix(`/ui`)"
       - "traefik.http.routers.portus-http.entrypoints=http"
       - "traefik.http.routers.portus-http.middlewares={% if portus.https_only == True %}redirect@file{% else %}{% if portus.auth == True %}{% if authelia.enable %}{% if portus.https_only == True %}, {% endif %}authelia@file{% else %}basicAuth@file{% endif %}{% endif %}{% endif %}"
       - "traefik.http.routers.portus.service=portus"
-      - "traefik.http.routers.portus.rule=Host(`{{ service_domain }}`)"
+      - "traefik.http.routers.portus.rule=Host(`{{ service_domain }}`) && PathPrefix(`/ui`)"
       - "traefik.http.routers.portus.entrypoints=https"
       - "traefik.http.routers.portus.middlewares={% if portus.auth == True %}{% if authelia.enable %}authelia@file{% else %}basicAuth@file{% endif %}{% endif %}{% if nextcloud.enable %}{% if portus.auth == True %}, {% endif %}{% if portus.https_only == True %}security-headers@file, {% endif %}nextcloud-redirectregex@file{% endif %}"
       - "traefik.http.routers.portus.tls=true"
 {% if traefik.dns_challenge_provider %}
       - "traefik.http.routers.portus.tls.certresolver=dns"
-{% if portus.custom_domain %}
+{% if portus.domain %}
       - "traefik.http.routers.portus.tls.domains[0].main={{ service_domain }}"
 {% else %}
       - "traefik.http.routers.portus.tls.domains[0].main={{ domain }}"
