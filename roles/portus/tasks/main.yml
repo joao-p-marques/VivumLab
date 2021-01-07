@@ -8,7 +8,6 @@
   loop:
     - portus
     - portus/secrets
-    - portus/secrets-registry
     - portus/mariadb
     - portus/registry
     - portus/registry/data
@@ -56,7 +55,7 @@
 - name: Start portus
   systemd:
     name: portus
-    enabled: yes
+    enabled: no
     daemon-reload: yes
     state: started
   become: yes
