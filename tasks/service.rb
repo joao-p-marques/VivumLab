@@ -54,11 +54,15 @@ class Service < Thor
   option :service, type: :string, desc: I18n.t('options.serviceswarning'), aliases: ['-s']
   def update
     run_common
-    options[:service].split(',').each do |service|
-      say I18n.t('service.update.out.updating', service: service).yellow
-      playbooks = %w[vivumlab restart]
-      run_playbooks(playbooks, options, limit_to_service(service))
-      say I18n.t('service.update.out.updated').green
+    playbooks = %w[vivumlab restart]
+    if options[:service].nil?
+      run_playbooks(playbooks, options, nil)
+    else
+      options[:service].split(',').each do |service|
+        say I18n.t('service.update.out.updating', service: service).yellow
+        run_playbooks(playbooks, options, limit_to_service(service))
+        say I18n.t('service.update.out.updated').green
+      end
     end
   end
 
@@ -76,7 +80,7 @@ class Service < Thor
     options[:service].split(',').each do |srv|
       say I18n.t('service.reset.out.resetting', service: srv.chomp).yellow
       run_playbooks(%w[stop remove vivumlab], options, limit_to_service(srv.chomp))
-      say I18n.t('service.s_reset', service: srv.chomp).green
+      say I18n.t('service.reset.out.reset', service: srv.chomp).green
     end
   end
 
@@ -97,7 +101,7 @@ class Service < Thor
     invoke 'config:show', [], service: options[:service]
   end
 
-  desc I18n.t('service.setup.usage'), I18n.t('service.setup.desc')
+  desc I18n.t('service.setup.usage'), I18n.t('service.setup.desc'), hide: true
   option :service, required: true, type: :string, desc: I18n.t('options.servicename'), aliases: ['-s']
   def setup
     return if guard_against_invalid_service_config?(options[:service])
