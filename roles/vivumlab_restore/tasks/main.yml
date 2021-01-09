@@ -41,13 +41,13 @@
     dest: "{{ volumes_root }}_restore.yml"
 
 - name: Spin up restore utility.
-  command: "docker-compose -f \"{{ volumes_root }}_restore.yml\" -p vivumlab_restore up -d"
+  command: 'docker-compose -f "{{ volumes_root }}_restore.yml" -p vivumlab_restore up -d'
 
 - name: Restore VivumLab data. (This could take quite a while depending on how much data you have.)
   command: "docker exec vivumlab_restore_restore_1 restic restore latest --target /"
 
 - name: Stop restore utility.
-  command: "docker-compose -f \"{{ volumes_root }}_restore.yml\" -p vivumlab_restore down"
+  command: 'docker-compose -f "{{ volumes_root }}_restore.yml" -p vivumlab_restore down'
 
 - name: Ensure enable services are not running
   systemd:
