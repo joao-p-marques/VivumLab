@@ -1,4 +1,12 @@
 ---
+- name: Get UID
+  command: id -u {{ vlab_ssh_user }}
+  register: uid_output
+
+- name: Get GID
+  command: id -g {{ vlab_ssh_user }}
+  register: gid_output
+
 - name: Make VivumLab data directories.
   file:
     path: "{{ item }}"
@@ -67,14 +75,6 @@
     path: "{{ volumes_root }}/traefik/acme.json"
     mode: 0600
     state: touch
-
-- name: Get UID
-  command: id -u {{ vlab_ssh_user }}
-  register: uid_output
-
-- name: Get GID
-  command: id -g {{ vlab_ssh_user }}
-  register: gid_output
 
 - name: Create Media Folders / NAS Mount Points
   when:
