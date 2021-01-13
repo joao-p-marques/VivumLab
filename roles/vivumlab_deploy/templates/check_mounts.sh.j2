@@ -24,7 +24,7 @@ for i in $file_lines; do
       mount -a
       cd {{ volumes_root }}
       systemctl stop $service
-      if [[ $pingurl != '' ]]
+      if [[ $pingurl != '' ]]; then
         curl -m 10 --retry 5 "$pingurl/fail" &> /dev/null
       fi
     fi
