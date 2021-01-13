@@ -7,7 +7,7 @@ pingurl=''
 file_lines=$(cat $filename)
 errors=0
 
-if [[ $pingurl != '' ]]
+if [[ $pingurl != '' ]]; then
   curl -m 10 --retry 5 "$pingurl/start" &> /dev/null
 fi
 
