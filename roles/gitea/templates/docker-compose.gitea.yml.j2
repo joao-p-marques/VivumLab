@@ -30,7 +30,6 @@ services:
       - LFS_START_SERVER=true
       - RUN_MODE=prod
       - ROOT_URL=https://{{ service_domain }}
-{% endif %}
     restart: unless-stopped
     volumes:
       - "{{ volumes_root }}/gitea/data:/var/lib/gitea"
