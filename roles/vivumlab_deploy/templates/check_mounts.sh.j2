@@ -18,8 +18,9 @@ for i in $file_lines; do
   findmnt -lo target | grep "$path" &> /dev/null
   if [[ $? == 1 ]]; then
     if [ -d "$path" ]; then
-      echo "$path found"
+      # echo "$path found"
     else
+      echo "$path not found"
       errors=$errors+1
       mount -a
       cd {{ volumes_root }}
