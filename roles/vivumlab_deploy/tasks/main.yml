@@ -52,7 +52,19 @@
     minute: "*/5"
     hour: "*"
     job: "/bin/bash {{ volumes_root }}/check_mounts.sh > /dev/null"
+    state: present
   become: yes
+  when: check_mounts == True
+
+- name: Ensure check_mounts.sh is removed as a cron job
+  cron:
+    name: "check mounts"
+    minute: "*/5"
+    hour: "*"
+    job: "/bin/bash {{ volumes_root }}/check_mounts.sh > /dev/null"
+    state: absent
+  become: yes
+  when: check_mounts == False
 
 - name: Configure docker log settings
   copy:

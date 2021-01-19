@@ -18,7 +18,7 @@ for i in $file_lines; do
   findmnt -lo target | grep "$path" &> /dev/null
   if [[ $? == 1 ]]; then
     if [ -d "$path" ]; then
-      # echo "$path found"
+      systemctl start $service
     else
       echo "$path not found"
       errors=$errors+1
@@ -29,6 +29,8 @@ for i in $file_lines; do
         curl -m 10 --retry 5 "$pingurl/fail" &> /dev/null
       fi
     fi
+  else
+    systemctl start $service
   fi
 done
 if [[ $errors == 0 ]]; then
