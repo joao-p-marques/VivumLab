@@ -29,7 +29,7 @@ ENV ANSIBLE_CONFIG=/data/ansible.cfg
 ENV PYTHONPATH /ansible/lib
 ENV PATH /ansible/bin:$PATH
 ENV ANSIBLE_LIBRARY /ansible/library
-ENV ANSIBLE_STRATEGY_PLUGINS=/usr/lib/python3.8/site-packages/ansible_mitogen/plugins/strategy
+ENV ANSIBLE_STRATEGY_PLUGINS=/opt/venv/lib/python3.7/site-packages/ansible_mitogen/plugins/strategy
 ENV ANSIBLE_STRATEGY=mitogen_linear
 
 # Environments
@@ -134,7 +134,7 @@ ENV ANSIBLE_CONFIG=/data/ansible.cfg
 ENV PYTHONPATH /ansible/lib
 ENV PATH /ansible/bin:$PATH
 ENV ANSIBLE_LIBRARY /ansible/library
-ENV ANSIBLE_STRATEGY_PLUGINS=/usr/lib/python3.8/site-packages/ansible_mitogen/plugins/strategy
+ENV ANSIBLE_STRATEGY_PLUGINS=/opt/venv/lib/python3.7/site-packages/ansible_mitogen/plugins/strategy
 ENV ANSIBLE_STRATEGY=mitogen_linear
 
 # Environments
