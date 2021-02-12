@@ -1,3 +1,10 @@
+### [1.3.1](https://github.com/VivumLab/VivumLab/compare/v1.3.0...v1.3.1) (2021-02-12)
+
+
+### Bug Fixes
+
+* only build docker amd64, armv6, armv7 and arm64 ([3e39557](https://github.com/VivumLab/VivumLab/commit/3e39557270e9f13027a76bd3ce6e5e6a9dac2844))
+
 ## [1.3.0](https://github.com/VivumLab/VivumLab/compare/v1.2.0...v1.3.0) (2021-02-11)
 
 
