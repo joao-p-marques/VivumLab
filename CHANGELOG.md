@@ -1,3 +1,10 @@
+### [1.3.2](https://github.com/VivumLab/VivumLab/compare/v1.3.1...v1.3.2) (2021-02-12)
+
+
+### Bug Fixes
+
+* fix typo apt-utils install ([e5416c7](https://github.com/VivumLab/VivumLab/commit/e5416c7d03f8dc956f152a3d9eb6c457bfc5cbf3))
+
 ### [1.3.1](https://github.com/VivumLab/VivumLab/compare/v1.3.0...v1.3.1) (2021-02-12)
 
 
