@@ -1,11 +1,21 @@
 ---
-- name: Make openldap directory.
+- name: Create openldap directories.
   file:
-    path: "{{ volumes_root }}/openldap"
+    path: "{{ volumes_root }}/{{ item }}"
     state: directory
     owner: "{{ uid_output.stdout }}"
     group: "{{ gid_output.stdout }}"
+  loop:
+    - openldap
+    - openldap/config
+    - openldap/data
   become: yes
+
+- name: Create OpenLDAP docker network
+  command: docker network create vivumlab_openldap
+  register: result
+  changed_when: "'network with name vivumlab_openldap already exists' not in result.stderr"
+  failed_when: "result.rc != 0 and 'network with name vivumlab_openldap already exists' not in result.stderr"
 
 - name: Copy openldap docker-compose.yml file into place.
   template:
@@ -30,3 +40,32 @@
     daemon-reload: yes
     state: started
   become: yes
+
+- name: Copy initial data into OpenLDAP dir
+  become: yes
+  template:
+    src: openldap-init.ldif.j2
+    dest: "{{ volumes_root }}/openldap/config/init.ldif"
+
+- name: Load initial data
+  command:
+    chdir: "{{ volumes_root }}/openldap/"
+    argv:
+      - docker-compose
+      - exec
+      - -T
+      - openldap
+      - ldapadd
+      - -x
+      - -D
+      - "cn=admin,dc={{ domain.split('.')|join(',dc=') }}"
+      - -w
+      - "{{ ldap_admin_password }}"
+      - -H
+      - ldap://localhost
+      - -ZZ
+      - -f
+      - /etc/ldap/slapd.d/init.ldif
+  register: result
+  changed_when: "'Already exists' not in result.stderr"
+  failed_when: "result.rc != 0 and 'Already exists' not in result.stderr"

@@ -1,0 +1,29 @@
+version: 1
+
+# Users group cn: cn=users,dc={{ domain.split('.')|join(',dc=') }}
+dn: cn=users,dc={{ domain.split('.')|join(',dc=') }}
+cn: users
+gidnumber: 500
+objectclass: posixGroup
+objectclass: top
+
+# Users group ou: ou=users,dc={{ domain.split('.')|join(',dc=') }}
+dn: ou=users,dc={{ domain.split('.')|join(',dc=') }}
+objectclass: organizationalUnit
+objectclass: top
+ou: users
+
+# Vlab default user: cn={{ default_username }},ou=users,dc={{ domain.split('.')|join(',dc=') }}
+dn: cn={{ default_username }},ou=users,dc={{ domain.split('.')|join(',dc=') }}
+cn: {{ default_username }}
+givenname: {{ default_user_name.split(' ')[0] }}
+sn: {{ default_user_name.split(' ')[1] }}
+gidnumber: 500
+homedirectory: /home/users/{{ default_username }}
+loginshell: /bin/sh
+objectclass: inetOrgPerson
+objectclass: posixAccount
+objectclass: top
+uid: {{ default_username }}
+uidnumber: 1000
+userpassword: {{ default_password }}

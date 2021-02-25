@@ -6,6 +6,8 @@ networks:
     external:
       name: vivumlab_traefik
   openldap:
+    external:
+      name: vivumlab_openldap
 
 services:
   openldap:
@@ -18,12 +20,14 @@ services:
       - 389:389
       - 689:689
     volumes:
-      - "{{ volumes_root }}/openldap/data:/var/lib/data"
+      - "{{ volumes_root }}/openldap/data:/var/lib/ldap"
       - "{{ volumes_root }}/openldap/config:/etc/ldap/slapd.d"
     environment:
-      - LDAP_ORGANISATION="{{ ldap_org_name }}"
-      - LDAP_DOMAIN="{{ domain }}"
-      - LDAP_ADMIN_PASSWORD="{{ default_password }}"
+      LDAP_LOG_LEVEL: "256"
+      LDAP_TLS: "true"
+      LDAP_ORGANISATION: "{{ ldap_org_name }}"
+      LDAP_DOMAIN: "{{ domain }}"
+      LDAP_ADMIN_PASSWORD: "{{ ldap_admin_password }}"
 
   phpldapadmin:
     container_name: phpldapadmin

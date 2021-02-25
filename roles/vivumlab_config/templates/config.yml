@@ -26,8 +26,10 @@ common_timezone: {{ common_timezone | default('Etc/UTC') }}
 # Necessary for SSL / LetsEncrypt to work.
 admin_email: {{ admin_email | default('admin_email@vivumlab.com') }}
 
-# Default user name to create as admin with services
+# Default user data to create as admin with services
 default_username: {{ default_username }}
+default_user_name: {{ default_user_name|default("") }}
+default_user_email: {{ default_user_email|default("") }}
 
 # Default storage location for service data, such as configuration data
 volumes_root: {{ volumes_root | default('/home/' + vlab_ssh_user + '/vivumlab') }}
@@ -48,6 +50,11 @@ arm: {{ arm | default('False') }}
 
 # Set this to true if you have trouble connection to your server.
 wait_for_connection: {{ wait_for_connection | default('False') }}
+
+# LDAP conf
+ldap_org_name: "Example Inc."
+# This password will be used for the service account
+ldap_admin_password: "{{ lookup('password', './settings/passwords/ldap_admin_password chars=ascii_letters') }}"
 
 # This configuration dictionary sets various details of your bastion host.
 # see the docs for more information about what a bastion host is and how
@@ -1045,7 +1052,7 @@ openldap:
   auth: {{ openldap.auth | default(False) }}
   domain: {{ openldap.domain | default(False) }}
   subdomain: {{ openldap.subdomain | default("openldap") }}
-  version: {{ openldap.version | default("1.2.2") }}
+  version: {{ openldap.version | default("1.5.0") }}
   web_version: {{ openldap.web_version | default("0.7.2") }}
   amd64: False
   arm64: False
