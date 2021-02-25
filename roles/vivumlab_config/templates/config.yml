@@ -994,6 +994,7 @@ nextcloud:
   enable: {{ nextcloud.enable | default(False) }}
   hsts: {{ nextcloud.hsts | default(True) }}
   auth: {{ nextcloud.auth | default(False) }}
+  ldap: {{ nextcloud.ldap | default(False) }}
   domain: {{ nextcloud.domain | default(False) }}
   subdomain: {{ nextcloud.subdomain | default("nextcloud") }}
   version: {{ nextcloud.version | default("fpm-alpine") }}

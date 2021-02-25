@@ -5,6 +5,11 @@ networks:
   traefik_network:
     external:
       name: vivumlab_traefik
+  {%- if nextcloud.ldap %}
+  openldap:
+    external:
+      name: vivumlab_openldap
+  {%- endif %}
   nextcloud:
 
 services:
@@ -36,6 +41,9 @@ services:
     user: "{{ uid_output.stdout }}:{{ gid_output.stdout }}"
     networks:
       - nextcloud
+      {%- if nextcloud.ldap %}
+      - openldap
+      {%- endif %}
     volumes:
       - "nextcloud:/var/www/html"
       - "{{ volumes_root }}/nextcloud/config:/var/www/html/config"

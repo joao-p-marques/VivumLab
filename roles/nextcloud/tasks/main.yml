@@ -78,3 +78,149 @@
     daemon-reload: yes
     state: started
   become: yes
+
+
+- name: wait for nextcloud to spin up and get status
+  when: "{{ nextcloud.ldap }}"
+  changed_when: no
+  delay: 10
+  register: _occ
+  retries: 10
+  until: _occ is succeeded and (_occ.stdout_lines[-1]|from_json).installed
+  command:
+    chdir: "{{ volumes_root }}/nextcloud/"
+    argv:
+      - docker-compose
+      - exec
+      - -T
+      - nextcloud
+      - php
+      - occ
+      - status
+      - --output=json
+
+- name: enable required apps
+  when: "{{ nextcloud.ldap }}"
+  loop:
+    - user_ldap
+  register: _result
+  changed_when: _result.stdout != '%s already enabled'|format(item)
+  command:
+    chdir: "{{ volumes_root }}/nextcloud/"
+    argv:
+      - docker-compose
+      - exec
+      - -T
+      - nextcloud
+      - php
+      - occ
+      - app:enable
+      - "{{ item }}"
+
+- block:
+    - &get_ldap
+      name: obtain ldap configuration s01
+      register: _ldap
+      when: "{{ nextcloud.ldap }}"
+      changed_when: no
+      failed_when: _ldap.stdout == "Invalid configID"
+      command:
+        chdir: "{{ volumes_root }}/nextcloud/"
+        argv:
+          - docker-compose
+          - exec
+          - -T
+          - nextcloud
+          - php
+          - occ
+          - ldap:show-config
+          - s01
+
+  rescue:
+    - name: create empty ldap configuration
+      when: "{{ nextcloud.ldap }}"
+      command:
+        chdir: "{{ volumes_root }}/nextcloud/"
+        argv:
+          - docker-compose
+          - exec
+          - -T
+          - nextcloud
+          - php
+          - occ
+          - ldap:create-empty-config
+
+    - *get_ldap
+
+- name: create LDAP nextcloud group
+  when: "{{ nextcloud.ldap }}"
+  command:
+    chdir: "{{ volumes_root }}/openldap/"
+    argv:
+      - docker-compose
+      - exec
+      - -T
+      - openldap
+      - ldapadd
+      - -x
+      - -D
+      - "cn=admin,dc={{ domain.split('.')|join(',dc=') }}"
+      - -w
+      - "{{ ldap_admin_password }}"
+      - -H
+      - ldap://localhost
+      - -ZZ
+    stdin: |-
+      dn: ou=nextcloud,dc={{ domain.split('.')|join(',dc=') }}
+      objectclass: organizationalUnit
+      objectclass: top
+      ou: users
+  register: result
+  changed_when: "'Already exists' not in result.stderr"
+  failed_when: "result.rc != 0 and 'Already exists' not in result.stderr"
+
+- name: configure ldap app
+  # HACK Idempotency for https://github.com/owncloud/user_ldap/issues/592
+  when: "{{ nextcloud.ldap }}"
+  changed_when: no
+  loop:
+    - [ldapAgentName, "cn=admin,dc={{ domain.split('.')|join(',dc=') }}"]
+    - [ldapAgentPassword, "{{ ldap_admin_password }}"]
+    - [ldapBase, "dc={{ domain.split('.')|join(',dc=') }}"]
+    - [ldapExpertUUIDGroupAttr, ou]
+    - [ldapExpertUUIDUserAttr, cn]
+    - [ldapExpertUsernameAttr, cn]
+    - [ldapGroupDisplayName, cn]
+    - [ldapHost, openldap]
+    - [ldapPort, 389]
+    - [ldapLoginFilter, "(&(objectclass=*)(|(uid=%uid)(|(memberOf=ou=nextcloud))))"]
+    - [ldapLoginFilterAttributes, memberOf]
+    - [ldapUserDisplayName, cn]
+  command:
+    chdir: "{{ volumes_root }}/nextcloud/"
+    argv:
+      - docker-compose
+      - exec
+      - -T
+      - nextcloud
+      - php
+      - occ
+      - ldap:set-config
+      - s01
+      - "{{ item.0 }}"
+      - "{{ item.1 }}"
+
+- name: check ldap app
+  when: "{{ nextcloud.ldap }}"
+  changed_when: no
+  command:
+    chdir: "{{ volumes_root }}/nextcloud/"
+    argv:
+      - docker-compose
+      - exec
+      - -T
+      - nextcloud
+      - php
+      - occ
+      - ldap:test-config
+      - s01
