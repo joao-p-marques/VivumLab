@@ -133,6 +133,7 @@ traefik:
   domain: {{ traefik.domain | default(False) }}
   subdomain: {{ traefik.subdomain | default("traefik") }}
   auth: {{ traefik.auth | default(False) }}
+  acme_server: {{ traefik.acme_server | default("https://acme-v02.api.letsencrypt.org/directory") }}
   expose_internally: {{ traefik.expose_internally | default(True) }}
   expose_externally: {{ traefik.expose_externally | default(False) }}
   ping: {{ traefik.ping | default(False) }}
