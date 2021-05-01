@@ -1003,7 +1003,10 @@ nextcloud:
   domain: {{ nextcloud.domain | default(False) }}
   subdomain: {{ nextcloud.subdomain | default("nextcloud") }}
   version: {{ nextcloud.version | default("21") }}
-  db_version: {{ nextcloud.db_version | default("12-alpine") }}
+  postgres: {{ nextcloud.postgres | default(True) }}
+  postgres_version: {{ nextcloud.postgres_version | default("12-alpine") }}
+  mariadb: {{ nextcloud.mariadb | default(False) }}
+  mariadb_version: {{ nextcloud.mariadb_version | default("10.5.3") }}
   redis_version: {{ nextcloud.redis_version | default("5.0-alpine") }}
   amd64: False
   arm64: False
