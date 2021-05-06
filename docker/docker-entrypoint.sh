@@ -27,4 +27,13 @@ clear
 
 cat /etc/motd
 
+echo "Starting ssh agent and adding your key."
+eval "$(ssh-agent -s)"
+for key in /root/.ssh/*; do
+  if [ "${key: -4}" == ".pub" ]; then
+    continue
+  fi
+  ssh-add $key
+done
+
 exec "$@"
