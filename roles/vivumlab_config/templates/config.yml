@@ -201,6 +201,23 @@ adguardhome:
   amd64: False
   arm64: False
   armv7: False
+airbyte:
+  enable: {{ airbyte.enable | default(False) }}
+  hsts: {{ airbyte.hsts | default(True) }}
+  auth: {{ airbyte.auth | default(False) }}
+  domain: {{ airbyte.domain | default(False) }}
+  subdomain: {{ airbyte.subdomain | default("airbyte")}}
+  airbyteversion: {{ airbyteversion | default("0.18.2-alpha")}}
+  serverversion: {{ airbyte.serverversion | default("0.18.2-alpha") }}
+  initversion: {{ airbyte.initversion | default("0.18.2-alpha") }}
+  dbversion: {{ airbyte.dbversion | default("0.18.2-alpha") }}
+  seedversion: {{ airbyte.seedversion | default("0.18.2-alpha") }}
+  schedulerversion: {{ airbyte.schedulerversion | default("0.18.2-alpha") }}
+  webappversion: {{ airbyte.webappversion | default("0.18.2-alpha") }}
+  temporalversion: {{ airbyte.temporalversion | default("1.7.0") }}
+  amd64: False
+  arm64: False
+  armv7: False
 airsonic:
   enable: {{ airsonic.enable | default(False) }}
   hsts: {{ airsonic.hsts | default(True) }}
@@ -1003,7 +1020,10 @@ nextcloud:
   domain: {{ nextcloud.domain | default(False) }}
   subdomain: {{ nextcloud.subdomain | default("nextcloud") }}
   version: {{ nextcloud.version | default("21") }}
-  db_version: {{ nextcloud.db_version | default("12-alpine") }}
+  postgres: {{ nextcloud.postgres | default(True) }}
+  postgres_version: {{ nextcloud.postgres_version | default("12-alpine") }}
+  mariadb: {{ nextcloud.mariadb | default(False) }}
+  mariadb_version: {{ nextcloud.mariadb_version | default("10.5.3") }}
   redis_version: {{ nextcloud.redis_version | default("5.0-alpine") }}
   amd64: False
   arm64: False
