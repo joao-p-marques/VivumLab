@@ -48,10 +48,17 @@ services:
 
   nextcloud:
     container_name: nextcloud
+    {% if nextcloud.image_type == "fpm-alpine" -%}
     build: ./build
+    {% else -%}
+    image: nextcloud:{{ nextcloud.version }}-{{ nextcloud.image_type }}
+    {% endif -%}
     restart: unless-stopped
     user: "{{ uid_output.stdout }}:{{ gid_output.stdout }}"
     networks:
+      {% if nextcloud.image_type != "fpm-alpine" -%}
+      - traefik_network
+      {% endif -%}
       - nextcloud
     volumes:
       - "nextcloud:/var/www/html"
@@ -91,10 +98,17 @@ services:
       - MAIL_FROM_ADDRESS={{ smtp.from_email }}
       - OVERWRITEHOST={{ service_domain }}
       - OVERWRITEPROTOCOL=https
+    {% if nextcloud.image_type != "fpm-alpine" -%}
+    labels:
+      - "traefik.http.services.nextcloud.loadbalancer.server.scheme=http"
+      - "traefik.http.services.nextcloud.loadbalancer.server.port=80"
+{% include './labels.j2' %}
+    {% endif -%}
     depends_on:
       - db
       - redis
 
+  {% if nextcloud.image_type == "fpm-alpine" -%}
   web:
     build: ./web
     restart: unless-stopped
@@ -109,6 +123,7 @@ services:
       - "traefik.http.services.nextcloud.loadbalancer.server.scheme=http"
       - "traefik.http.services.nextcloud.loadbalancer.server.port=80"
 {% include './labels.j2' %}
+  {% endif %}
 
 volumes:
   nextcloud:

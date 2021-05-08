@@ -32,6 +32,7 @@
   become: yes  # /mnt is owned by root
 
 - name: Copy nextcloud web Dockerfile into place.
+  when: nextcloud.image_type == "fpm-alpine"
   copy:
     src: "web/Dockerfile"
     dest: "{{ volumes_root }}/nextcloud/web/Dockerfile"
@@ -40,6 +41,7 @@
   become: yes
 
 - name: Copy nextcloud web nginx.conf into place.
+  when: nextcloud.image_type == "fpm-alpine"
   copy:
     src: "web/nginx.conf"
     dest: "{{ volumes_root }}/nextcloud/web/nginx.conf"
@@ -48,6 +50,7 @@
   become: yes
 
 - name: Copy nextcloud build Dockerfile into place.
+  when: nextcloud.image_type == "fpm-alpine"
   template:
     src: Dockerfile.j2
     dest: "{{ volumes_root }}/nextcloud/build/Dockerfile"
@@ -56,6 +59,7 @@
   become: yes
 
 - name: Copy nextcloud build entrypoint.sh into place.
+  when: nextcloud.image_type == "fpm-alpine"
   copy:
     src: "build/entrypoint.sh"
     dest: "{{ volumes_root }}/nextcloud/build/entrypoint.sh"
