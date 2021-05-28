@@ -1020,6 +1020,8 @@ nextcloud:
   domain: {{ nextcloud.domain | default(False) }}
   subdomain: {{ nextcloud.subdomain | default("nextcloud") }}
   version: {{ nextcloud.version | default("21") }}
+  image_type: {{ nextcloud.image_type | default("fpm-alpine") }}
+  system_user: {{ nextcloud.system_user | default(True) }}
   postgres: {{ nextcloud.postgres | default(True) }}
   postgres_version: {{ nextcloud.postgres_version | default("12-alpine") }}
   mariadb: {{ nextcloud.mariadb | default(False) }}
